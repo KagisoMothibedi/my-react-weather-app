@@ -3,7 +3,7 @@ import "./weather.css";
 import WeatherDate from "./weatherDate";
 
 import logo from "./images/logo.png";
-import ReactAnimatedWeather from "react-animated-weather";
+// import ReactAnimatedWeather from "react-animated-weather";
 // import { Audio } from "react-loader-spinner";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ export default function Weather(props) {
   let [weatherData, setweatherData] = useState({ ready: false });
   let [city, setCity] = useState(props.defaultCity);
   let temp = weatherData.temperature;
- 
+
   let [unit, setUnit] = useState("Celsius");
 
   function showTemperature(response) {
@@ -104,11 +104,15 @@ export default function Weather(props) {
                 <span className="degreesSymbol">
                   {" "}
                   <a href="/" onClick={toCelsius}>
-                    °C{" "}
+                    °C {unit}
                   </a>{" "}
-                  | {" "}
+                  |{" "}
                 </span>
-                <span className="degreesSymbol"><a href="/" onClick={toFahrenheit}>&#176;F </a></span>
+                <span className="degreesSymbol">
+                  <a href="/" onClick={toFahrenheit}>
+                    &#176;F{" "}
+                  </a>
+                </span>
               </h3>
             </div>
           </div>
