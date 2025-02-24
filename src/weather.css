@@ -9,11 +9,13 @@
 }
 
 body {
-  background-color: red;
+  background-color: #f9f7fe;
 }
+
 #logo-img {
   width: 130px;
 }
+
 #submit-btn {
   background-color: #885df1;
   padding: 8px;
@@ -40,9 +42,7 @@ body {
   top: -32px;
 }
 
-.details-one {
-  background-color: #885df1;
-}
+
 /* .temperatures {
   font-size: 14px;
   display: inline-block;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./weather.css";
 import WeatherDate from "./weatherDate";
-import weatherinfo from "./WeatherInfo.js";
+
 import logo from "./images/logo.png";
 import ReactAnimatedWeather from "react-animated-weather";
 // import { Audio } from "react-loader-spinner";
@@ -12,7 +12,10 @@ export default function Weather(props) {
   //   let [ready, setReady] = useState(false);
   // let [temperature, setTemperature] = useState(null);
   let [weatherData, setweatherData] = useState({ ready: false });
-  //   let [city, setCity] = useState(props.defaultCity);
+  let [city, setCity] = useState(props.defaultCity);
+  let temp = weatherData.temperature;
+ 
+  let [unit, setUnit] = useState("Celsius");
 
   function showTemperature(response) {
     console.log(response.data);
@@ -28,31 +31,49 @@ export default function Weather(props) {
       date: new Date(response.data.dt * 1000),
 
       description: response.data.weather[0].description,
-      tempIcon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      tempIcon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
     // setTemperature(response.data.main.temp);
   }
   //api.shecodes.io/weather/v1/current?query=London&key=5201594abea9f3e38b70e65b11a80c24
-  //   function captureCity(event) {
-  //     return "Hello!";
-  //   }
-  //   function handleFunction(event) {
-  //     event.preventDefault();
-  //   }
+
+  function search() {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7746bdeabca928cfedcad71e52fd9d66&units=metric`;
+    axios.get(url).then(showTemperature);
+  }
+  function handleCity(event) {
+    setCity(event.target.value);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+  function toFahrenheit(event) {
+    event.preventDefault();
+    let temp = props.temperature * (9 / 5) + 32;
+    setUnit("Imperial");
+    weatherData.temperature(temp);
+  }
+  function toCelsius(event) {
+    event.preventDefault();
+    setUnit("Celsius");
+    weatherData.temperature(temp);
+  }
+
   if (weatherData.ready) {
     return (
       <div className="container-body">
         <div className="container mt-5">
           <img src={logo} alt="brand-logo" id="logo-img" /> <br />
-          <form className="mt-4 mb-5">
+          <form onSubmit={handleSubmit} className="mt-4 mb-5">
             <input
               type="text"
               placeholder="Enter a city..."
               id="search-field"
+              onChange={handleCity}
             />
             <input type="submit" value="Search" id="submit-btn" />
           </form>
-          <weatherinfo />
           <hr />
           <h1 mt-3>{weatherData.city}</h1>
           <div className="details-section d-flex justify-content-between">
@@ -75,16 +96,23 @@ export default function Weather(props) {
                 Humidity:<span className="two"> {weatherData.humidity}%</span> ,
                 Wind: <span className="two">{weatherData.wind}km/h</span>
               </p>
-              {weatherData.tempIcon}
+              <img src={weatherData.tempIcon} alt="Weather Icon" />
             </div>
             <div className="details-one ">
               <h3 className="temp">
                 {Math.round(weatherData.temperature)}
-                <span className="degreesSymbol">&#176;C</span>
+                <span className="degreesSymbol">
+                  {" "}
+                  <a href="/" onClick={toCelsius}>
+                    °C{" "}
+                  </a>{" "}
+                  | {" "}
+                </span>
+                <span className="degreesSymbol"><a href="/" onClick={toFahrenheit}>&#176;F </a></span>
               </h3>
             </div>
           </div>
-          <div className="weather-container mt-4 mb-4">
+          {/* <div className="weather-container mt-4 mb-4">
             <div className="weather-elements d-flex justify-content-center">
               <div className="img-cont">
                 <p style={{ color: "#B1AFBA" }}>Mon</p>
@@ -228,7 +256,7 @@ export default function Weather(props) {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <hr />
           <p style={{ color: "#B1AFBA" }} mt-3>
             This project was coded by <a href="shecodes.io">SheCodes</a> and is
@@ -244,8 +272,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=7746bdeabca928cfedcad71e52fd9d66&units=metric`;
-    axios.get(url).then(showTemperature);
+    search();
     return (
       //   <ThreeDots
       //     visible={true}
