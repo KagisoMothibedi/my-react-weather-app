@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./weather.css";
 import WeatherDate from "./weatherDate";
+import WeatherTemp from "./WeatherTemp.js";
 
 import logo from "./images/logo.png";
 // import ReactAnimatedWeather from "react-animated-weather";
@@ -13,9 +14,9 @@ export default function Weather(props) {
   // let [temperature, setTemperature] = useState(null);
   let [weatherData, setweatherData] = useState({ ready: false });
   let [city, setCity] = useState(props.defaultCity);
-  let temp = weatherData.temperature;
+//   let temp = weatherData.temperature;
 
-  let [unit, setUnit] = useState("Celsius");
+//   let [unit, setUnit] = useState("Celsius");
 
   function showTemperature(response) {
     console.log(response.data);
@@ -48,17 +49,17 @@ export default function Weather(props) {
     event.preventDefault();
     search();
   }
-  function toFahrenheit(event) {
-    event.preventDefault();
-    let temp = props.temperature * (9 / 5) + 32;
-    setUnit("Imperial");
-    weatherData.temperature(temp);
-  }
-  function toCelsius(event) {
-    event.preventDefault();
-    setUnit("Celsius");
-    weatherData.temperature(temp);
-  }
+//   function toFahrenheit(event) {
+//     event.preventDefault();
+//     let temp = props.temperature * (9 / 5) + 32;
+//     setUnit("Imperial");
+//     weatherData.temperature(temp);
+//   }
+//   function toCelsius(event) {
+//     event.preventDefault();
+//     setUnit("Celsius");
+//     weatherData.temperature(temp);
+//   }
 
   if (weatherData.ready) {
     return (
@@ -99,12 +100,14 @@ export default function Weather(props) {
               <img src={weatherData.tempIcon} alt="Weather Icon" />
             </div>
             <div className="details-one ">
-              <h3 className="temp">
+              <WeatherTemp celsius={weatherData.temperature} />
+              {/* <h3 className="temp">
                 {Math.round(weatherData.temperature)}
+                <span style={{fontSize :"20px"}}> {unit}</span>
                 <span className="degreesSymbol">
                   {" "}
                   <a href="/" onClick={toCelsius}>
-                    °C {unit}
+                    °C
                   </a>{" "}
                   |{" "}
                 </span>
@@ -113,7 +116,7 @@ export default function Weather(props) {
                     &#176;F{" "}
                   </a>
                 </span>
-              </h3>
+              </h3> */}
             </div>
           </div>
           {/* <div className="weather-container mt-4 mb-4">

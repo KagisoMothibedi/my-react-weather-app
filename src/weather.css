@@ -41,7 +41,10 @@ body {
   position: relative;
   top: -32px;
 }
-
+.details-one {
+  background-color: #f7648f;
+  width: 250px;
+}
 
 /* .temperatures {
   font-size: 14px;
