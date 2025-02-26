@@ -78,7 +78,7 @@ export default function Weather(props) {
           <hr />
           <h1 mt-3>{weatherData.city}</h1>
           <div className="details-section d-flex justify-content-between">
-            <div className="details mt-3">
+            <div className="details  mt-3">
               {/* <p className="d-inline-block" style={{ color: "#B1AFBA" }}>
             
                 <WeatherDate date={weatherData.date} />,{weatherData.description}{" "}
@@ -99,7 +99,7 @@ export default function Weather(props) {
               </p>
               <img src={weatherData.tempIcon} alt="Weather Icon" />
             </div>
-            <div className="details-one ">
+            <div className="details-one d-flex justify-content-end">
               <WeatherTemp celsius={weatherData.temperature} />
               {/* <h3 className="temp">
                 {Math.round(weatherData.temperature)}

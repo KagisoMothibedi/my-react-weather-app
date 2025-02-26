@@ -42,10 +42,16 @@ body {
   top: -32px;
 }
 .details-one {
-  background-color: #f7648f;
   width: 250px;
 }
-
+.WeatherTemperature h3 {
+  font-size: 80px;
+}
+.WeatherTemperature .unit {
+  font-size: 30px;
+  position: relative;
+  top: -32px;
+}
 /* .temperatures {
   font-size: 14px;
   display: inline-block;

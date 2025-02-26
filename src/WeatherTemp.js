@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./weather.css";
 
 export default function WeatherTemperature(props) {
   const [unit, setUnit] = useState("celsius");
@@ -20,7 +21,7 @@ export default function WeatherTemperature(props) {
   if (unit === "celsius") {
     return (
       <div className="WeatherTemperature">
-        <span className="temperature">
+        <span className="temperature d-inline-block">
           <h3>{Math.round(props.celsius)}</h3>
         </span>
         <span className="unit">
@@ -34,7 +35,9 @@ export default function WeatherTemperature(props) {
   } else {
     return (
       <div className="WeatherTemperature">
-        <span className="temperature"><h3>{Math.round(fahrenheit())}</h3></span>
+        <span className="temperature d-inline-block">
+          <h3>{Math.round(fahrenheit())}</h3>
+        </span>
         <span className="unit">
           <a href="/" onClick={showCelsius}>
             °C
