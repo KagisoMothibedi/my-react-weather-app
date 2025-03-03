@@ -79,3 +79,8 @@ body {
 .two {
   color: #fa97b4;
 }
+
+.forecast-temp-min {
+  opacity:0.6;
+  margin-left: 5px;
+}

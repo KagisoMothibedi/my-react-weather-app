@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./weather.css";
 import WeatherDate from "./weatherDate";
 import WeatherTemp from "./WeatherTemp.js";
+import WeatherForecast from "./weatherForecast.js";
 
 import logo from "./images/logo.png";
 // import ReactAnimatedWeather from "react-animated-weather";
@@ -14,9 +15,9 @@ export default function Weather(props) {
   // let [temperature, setTemperature] = useState(null);
   let [weatherData, setweatherData] = useState({ ready: false });
   let [city, setCity] = useState(props.defaultCity);
-//   let temp = weatherData.temperature;
+  //   let temp = weatherData.temperature;
 
-//   let [unit, setUnit] = useState("Celsius");
+  //   let [unit, setUnit] = useState("Celsius");
 
   function showTemperature(response) {
     console.log(response.data);
@@ -30,7 +31,7 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       city: response.data.name,
       date: new Date(response.data.dt * 1000),
-
+      coordinates: response.data.coord,
       description: response.data.weather[0].description,
       tempIcon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
     });
@@ -49,17 +50,17 @@ export default function Weather(props) {
     event.preventDefault();
     search();
   }
-//   function toFahrenheit(event) {
-//     event.preventDefault();
-//     let temp = props.temperature * (9 / 5) + 32;
-//     setUnit("Imperial");
-//     weatherData.temperature(temp);
-//   }
-//   function toCelsius(event) {
-//     event.preventDefault();
-//     setUnit("Celsius");
-//     weatherData.temperature(temp);
-//   }
+  //   function toFahrenheit(event) {
+  //     event.preventDefault();
+  //     let temp = props.temperature * (9 / 5) + 32;
+  //     setUnit("Imperial");
+  //     weatherData.temperature(temp);
+  //   }
+  //   function toCelsius(event) {
+  //     event.preventDefault();
+  //     setUnit("Celsius");
+  //     weatherData.temperature(temp);
+  //   }
 
   if (weatherData.ready) {
     return (
@@ -119,6 +120,11 @@ export default function Weather(props) {
               </h3> */}
             </div>
           </div>
+          <WeatherForecast
+            maxTemp={weatherData.MaxTemperature}
+            minTemp={weatherData.MinTemperature}
+            coordinates={weatherData.coordinates}
+          />
           {/* <div className="weather-container mt-4 mb-4">
             <div className="weather-elements d-flex justify-content-center">
               <div className="img-cont">
