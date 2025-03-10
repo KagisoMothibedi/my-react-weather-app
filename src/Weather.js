@@ -3,6 +3,7 @@ import "./weather.css";
 import WeatherDate from "./weatherDate";
 import WeatherTemp from "./WeatherTemp.js";
 import WeatherForecast from "./weatherForecast.js";
+import WeatherIcon from "./WeatherIcon.js";
 
 import logo from "./images/logo.png";
 // import ReactAnimatedWeather from "react-animated-weather";
@@ -33,7 +34,7 @@ export default function Weather(props) {
       date: new Date(response.data.dt * 1000),
       coordinates: response.data.coord,
       description: response.data.weather[0].description,
-      tempIcon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      tempIcon: response.data.weather[0].icon,
     });
     // setTemperature(response.data.main.temp);
   }
@@ -98,7 +99,8 @@ export default function Weather(props) {
                 Humidity:<span className="two"> {weatherData.humidity}%</span> ,
                 Wind: <span className="two">{weatherData.wind}km/h</span>
               </p>
-              <img src={weatherData.tempIcon} alt="Weather Icon" />
+              {/* <img src={weatherData.tempIcon} alt="Weather Icon" /> */}
+              <WeatherIcon code={weatherData.tempIcon} size={52} />
             </div>
             <div className="details-one d-flex justify-content-end">
               <WeatherTemp celsius={weatherData.temperature} />

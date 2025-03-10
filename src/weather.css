@@ -72,15 +72,14 @@ body {
   font-size: 30px;
 }
 
-.one {
+.forecast-temp-max {
   color: #f7648f;
   font-weight: bold;
 }
-.two {
-  color: #fa97b4;
-}
+
 
 .forecast-temp-min {
   opacity:0.6;
   margin-left: 5px;
+    color: #fa97b4;
 }
